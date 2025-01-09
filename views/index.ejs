@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles/tailwind.css" />
+    <title>Blog</title>
+  </head>
+  <body>
+    <%- include('partials/header.ejs') %>
+
+    <div class="grid grid-cols-2 gap-4 pt-4 px-2">
+  
+        <% if (userData) { %>
+          <% userData.forEach(function(post) { %>
+            
+              <div class="bg-yellow-300 rounded-lg p-4"> <h2 style="text-decoration: underline" ><a href="/article/<%= post.titleofblog %>"><%= post.titleofblog %></a></h2>
+          
+                <p><strong>By:</strong> <%= post.name %></p>
+                <p><strong>Date:</strong> <%= post.postdate %></p></div>
+        
+    
+          <% }); %>
+        <% } %>
+     
+    </div>
+
+    
+    <div class="flex mx-auto w-full justify-center items-center min-h-[800px]">
+
+        <div class="min-h-[500px] bg-blue-400 p-4 rounded-lg max-w-[700px] w-1/3">
+          <form  action="/submit"  method="post" >
+          <div class="flex justify-between mb-4 "><label class=" mr-9 text-white" for ="name ">Username:</label>
+            <input  class="w-80 ml-auto p-2"
+              type="text"
+              id="username"
+              name="name"
+           
+      
+            /><br /><br />
+          </div>  
+
+          <div class="flex justify-between mb-4 ">
+            <label   class="mr-9 text-white" for="title">Blog Title:</label>
+            <input  class="w-80 ml-auto p-2 "
+              type="text"
+              id="blogtitle"
+              name="titleofblog"
+      
+          
+            /><br /><br />
+          </div>
+            <div class="flex justify-between  mb-4 "> <label  class="mr-9 text-white" for="blogpost">Date:</label>
+              <input  class="w-80 ml-auto p-2 "
+                type="date"
+                id="date"p-2  
+                name="postdate"
+                placeholder="post date"
+         
+              /><br /><br /></div>
+           <div class="flex  flex-col mb-0 "> <label class="mr-9 mb-4 text-white" for="blogpost">Article:</label>
+            <textarea  class="w-full h-60" name="blogtext" id="blogtextarea"></textarea>
+            <br /><br /></div>
+
+            <div class="flex justify-center mt-0"><input class="bg-lime-400 w-40 h-10 rounded-lg" type="submit" /></div>
+            
+          </form>
+      
+        </div>
+
+      </div>
+
+   
+
+  </body>
+</html>
