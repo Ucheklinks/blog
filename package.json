@@ -5,8 +5,10 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+     "nodemon": "nodemon index.js", 
     "tailwind": "npx tailwindcss -i ./public/styles/style.css -o ./public/styles/tailwind.css --watch",
     "prettier": "npx prettier --write ./**/*.ejs"
+   
   },
   "author": "UCHECHUKWU MAKUOCHUKWU UNACHUKWU",
   "license": "ISC",
