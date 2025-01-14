@@ -8,6 +8,7 @@ let userArray = [];
 
 function customSlug(text) {
   return text
+    .trim()
     .toLowerCase()
     .replace(/ /g, "-")
     .replace(/[^\w-]+/g, "");
@@ -27,7 +28,12 @@ app.get("/home", (req, res) => {
 
 app.get("/delete/article/:slug", (req, res) => {
   const deleteSlug = req.params.slug;
-  userArray.pop((anyPost) => anyPost.slug === deleteSlug);
+  // if item is last in array, set the userArray to empty.
+  // else user array filter method to filter out the item you want to delete
+  userArray =
+    userArray.length === 1
+      ? []
+      : userArray.filter((item) => item.slug !== deleteSlug);
   res.redirect("/");
   res.render("index.ejs", { userData: userArray });
 });
@@ -40,8 +46,10 @@ app.get("/edit/article/:slug", (req, res) => {
   res.render("editblog.ejs", { blog: fetchPost });
   res.redirect("/");
 });
+
 app.get("/article/:slug", (req, res) => {
   //that :slug is just a placeholder for whatever slug is clicked (which would be an anchor tag in the index.ejs file)
+
   const postSlug = req.params.slug;
   const fetchedPost = userArray.find(
     (fetchedPost) => fetchedPost.slug === postSlug
