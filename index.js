@@ -8,6 +8,7 @@ let userArray = [];
 
 function customSlug(text) {
   return text
+    .trim()
     .toLowerCase()
     .replace(/ /g, "-")
     .replace(/[^\w-]+/g, "");
@@ -27,7 +28,11 @@ app.get("/home", (req, res) => {
 
 app.get("/delete/article/:slug", (req, res) => {
   const deleteSlug = req.params.slug;
-  userArray.pop((anyPost) => anyPost.slug === deleteSlug);
+  const index = userArray.findIndex((anyPost) => anyPost.slug === deleteSlug);
+
+  if (index !== -1) {
+    userArray.splice(index, 1);
+  }
   res.redirect("/");
   res.render("index.ejs", { userData: userArray });
 });
@@ -36,13 +41,18 @@ app.get("/edit/article/:slug", (req, res) => {
   console.log(userArray);
   const editSlug = req.params.slug;
   const fetchPost = userArray.find((anyPost) => anyPost.slug === editSlug);
-  userArray.pop((anyPost) => anyPost.slug === editSlug);
+  const index = userArray.findIndex((anyPost) => anyPost.slug === editSlug);
+  if (index !== -1) {
+    userArray.splice(index, 1);
+  }
   res.render("editblog.ejs", { blog: fetchPost });
   res.redirect("/");
 });
 app.get("/article/:slug", (req, res) => {
   //that :slug is just a placeholder for whatever slug is clicked (which would be an anchor tag in the index.ejs file)
   const postSlug = req.params.slug;
+
+  console.log(postSlug);
   const fetchedPost = userArray.find(
     (fetchedPost) => fetchedPost.slug === postSlug
   );

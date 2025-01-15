@@ -5,10 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-     "nodemon": "nodemon index.js", 
+    "dev": "nodemon index.js",
     "tailwind": "npx tailwindcss -i ./public/styles/style.css -o ./public/styles/tailwind.css --watch",
     "prettier": "npx prettier --write ./**/*.ejs"
-   
   },
   "author": "UCHECHUKWU MAKUOCHUKWU UNACHUKWU",
   "license": "ISC",
@@ -16,7 +15,8 @@
     "body-parser": "^1.20.3",
     "ejs": "^3.1.10",
     "express": "^4.21.2",
-    "express-validator": "^7.2.1"
+    "express-validator": "^7.2.1",
+    "nodemon": "^3.1.9"
   },
   "devDependencies": {
     "husky": "^9.1.7",
